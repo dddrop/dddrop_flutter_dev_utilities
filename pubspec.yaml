@@ -15,4 +15,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.4
+  hooks_riverpod: ^1.0.3
+  filterable_logger: ^0.0.6
+
 flutter:
