@@ -17,28 +17,28 @@ class ProviderDebugger implements ProviderObserver {
   @override
   void didAddProvider(ProviderBase<dynamic> provider, Object? value,
       ProviderContainer container) {
-    FL.info('<${provider.toString()} in ${container.toString()}> added',
+    FL.info('<${provider.runtimeType}[${identityHashCode(provider)}]> add',
         tags: _tags);
   }
 
   @override
   void didDisposeProvider(
       ProviderBase<dynamic> provider, ProviderContainer container) {
-    FL.info('<${provider.toString()} in ${container.toString()}> disposed',
+    FL.info('<${provider.runtimeType}[${identityHashCode(provider)}]> disposed',
         tags: _tags);
   }
 
   @override
   void didUpdateProvider(ProviderBase<dynamic> provider, Object? previousValue,
       Object? newValue, ProviderContainer container) {
-    FL.info('<${provider.toString()} in ${container.toString()}> updated',
+    FL.info('<${provider.runtimeType}[${identityHashCode(provider)}]> updated',
         tags: _tags);
   }
 
   @override
   void providerDidFail(ProviderBase<dynamic> provider, Object error,
       StackTrace stackTrace, ProviderContainer container) {
-    FL.info('<${provider.toString()} in ${container.toString()}> failed',
+    FL.info('<${provider.runtimeType}[${identityHashCode(provider)}]> failed',
         tags: _tags);
   }
 }
