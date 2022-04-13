@@ -48,3 +48,7 @@ Future<Either<Exception, A>> catchingExceptionFuture<A>(
     return left(e);
   }
 }
+
+extension Tuple2ToArrayExtension<T> on Tuple2<T, T> {
+  List<T> toArray() => <T>[value1, value2];
+}
