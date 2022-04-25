@@ -50,5 +50,5 @@ Future<Either<Exception, A>> catchingExceptionFuture<A>(
 }
 
 extension Tuple2ToArrayExtension<T> on Tuple2<T, T> {
-  List<T> toArray() => <T>[value1, value2];
+  List<T> toList() => <T>[value1, value2];
 }
