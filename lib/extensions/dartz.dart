@@ -30,6 +30,10 @@ extension FutureEitherExtension<L extends Exception, R>
       then((Either<L, R> either) => either.throwIfLeft());
 
   Future<R> getOrThrow() => then((Either<L, R> either) => either.getOrThrow());
+
+  Future<Either<L, R2>> map<R2>(R2 Function(R) func) async {
+    return (await this).map(func);
+  }
 }
 
 Either<Exception, A> catchingException<A>(Function0<A> f) {
