@@ -10,16 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  crypto: ^3.0.1
+  crypto: ^3.0.2
   dartz: ^0.10.1
-  flutter_hooks: ^0.18.3
-  go_router: ^3.0.7
+  flutter_hooks: ^0.18.4
+  go_router: ^3.1.1
+  hooks_riverpod: ^2.0.0-dev.9
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.4
-  hooks_riverpod: ^1.0.3
+  flutter_lints: ^2.0.1
   filterable_logger: ^0.0.6
 
 flutter:
