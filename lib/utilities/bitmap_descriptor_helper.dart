@@ -9,10 +9,13 @@ class BitmapDescriptorHelper {
   BitmapDescriptorHelper._();
 
   static Future<BitmapDescriptor> getBitmapDescriptorFromSvgAsset(
-      BuildContext context, String svgAssetLink) async {
+    BuildContext context,
+    String svgAssetLink,
+    Size size,
+  ) async {
     final ui.Image svgImage =
         await _getSvgImageFromAssets(context, svgAssetLink);
-    final ui.Image sizedSvgImage = await _getSizedSvgImage(svgImage);
+    final ui.Image sizedSvgImage = await _getSizedSvgImage(svgImage, size);
 
     final ByteData? pngSizedBytes =
         await sizedSvgImage.toByteData(format: ui.ImageByteFormat.png);
@@ -24,9 +27,11 @@ class BitmapDescriptorHelper {
   }
 
   static Future<BitmapDescriptor> getBitmapDescriptorFromSvgString(
-      String svgString) async {
+    String svgString,
+    Size size,
+  ) async {
     final ui.Image svgImage = await _getSvgImageFromString(svgString);
-    final ui.Image sizedSvgImage = await _getSizedSvgImage(svgImage);
+    final ui.Image sizedSvgImage = await _getSizedSvgImage(svgImage, size);
 
     final ByteData? pngSizedBytes =
         await sizedSvgImage.toByteData(format: ui.ImageByteFormat.png);
@@ -38,7 +43,9 @@ class BitmapDescriptorHelper {
   }
 
   static Future<ui.Image> _getSvgImageFromAssets(
-      BuildContext context, String svgAssertLink) async {
+    BuildContext context,
+    String svgAssertLink,
+  ) async {
     final String svgString =
         await DefaultAssetBundle.of(context).loadString(svgAssertLink);
     final DrawableRoot drawableRoot = await svg.fromSvgString(svgString, '');
@@ -58,10 +65,12 @@ class BitmapDescriptorHelper {
     return image;
   }
 
-  static Future<ui.Image> _getSizedSvgImage(ui.Image svgImage) async {
-    final double size = 50 * ui.window.devicePixelRatio;
-    final double width = size;
-    final double height = width;
+  static Future<ui.Image> _getSizedSvgImage(
+    ui.Image svgImage,
+    Size size,
+  ) async {
+    final double width = size.width * ui.window.devicePixelRatio;
+    final double height = size.height * ui.window.devicePixelRatio;
 
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
