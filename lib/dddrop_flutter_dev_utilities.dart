@@ -8,5 +8,6 @@ export 'extensions/go_router.dart';
 export 'extensions/string.dart';
 export 'extensions/use_async_effect.dart';
 export 'logger/provider_debugger.dart';
+export 'utilities/bitmap_descriptor_helper.dart';
 export 'utilities/constants/color.dart';
 export 'utilities/string.dart';
