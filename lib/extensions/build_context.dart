@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-extension BuildContextUtilites on BuildContext {
+extension BuildContextX on BuildContext {
   Size get size => MediaQuery.of(this).size;
 
   double get width => MediaQuery.of(this).size.width;

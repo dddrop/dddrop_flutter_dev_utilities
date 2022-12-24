@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
-extension CustomTransitionPageExtension<T> on CustomTransitionPage<T> {
+extension CustomTransitionPageX<T> on CustomTransitionPage<T> {
   static CustomTransitionPage<T> fade<T>(Widget child) =>
       CustomTransitionPage<T>(
         child: child,

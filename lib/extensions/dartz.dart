@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-extension EitherExtension<L extends Object, R> on Either<L, R> {
+extension EitherX<L extends Object, R> on Either<L, R> {
   Left<L, Never> asLeft() {
     return fold(
       (L l) => Left<L, Never>(l),
@@ -18,14 +18,13 @@ extension EitherExtension<L extends Object, R> on Either<L, R> {
   R? getOrNull() => fold((L l) => null, id);
 }
 
-extension EitherExceptionExtension<L extends Exception, R> on Either<L, R> {
+extension EitherExceptionX<L extends Exception, R> on Either<L, R> {
   void throwIfLeft() => fold((L l) => throw l, (R r) {});
 
   R getOrThrow() => fold((L l) => throw l, (R r) => r);
 }
 
-extension FutureEitherExtension<L extends Exception, R>
-    on Future<Either<L, R>> {
+extension FutureEitherX<L extends Exception, R> on Future<Either<L, R>> {
   Future<void> throwIfLeft() =>
       then((Either<L, R> either) => either.throwIfLeft());
 
@@ -53,6 +52,6 @@ Future<Either<Exception, A>> catchingExceptionFuture<A>(
   }
 }
 
-extension Tuple2ToArrayExtension<T> on Tuple2<T, T> {
+extension Tuple2ToArrayX<T> on Tuple2<T, T> {
   List<T> toList() => <T>[value1, value2];
 }

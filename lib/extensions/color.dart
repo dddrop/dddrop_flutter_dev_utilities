@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-extension ColorExtension on Color {
+extension ColorX on Color {
   Color darken([double amount = .1]) {
     assert(amount >= 0 && amount <= 1);
 
