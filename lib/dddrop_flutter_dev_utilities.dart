@@ -6,6 +6,7 @@ export 'extensions/dartz.dart';
 export 'extensions/future.dart';
 export 'extensions/generics.dart';
 export 'extensions/go_router.dart';
+export 'extensions/list.dart';
 export 'extensions/string.dart';
 export 'extensions/use_async_effect.dart';
 export 'logger/provider_debugger.dart';
