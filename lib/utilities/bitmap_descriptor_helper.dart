@@ -11,12 +11,12 @@ class BitmapDescriptorHelper {
     String svgAssetLink,
     Size size,
   ) async {
-    return SvgAssetLoader(svgAssetLink)
-        .loadBytes(context)
-        .then((ByteData value) => BitmapDescriptor.fromBytes(
-              value.buffer.asUint8List(),
-              size: size,
-            ));
+    final SvgPicture svgPicture = SvgPicture.asset(svgAssetLink);
+    final ByteData bytes = await svgPicture.bytesLoader.loadBytes(context);
+    return BitmapDescriptor.fromBytes(
+      bytes.buffer.asUint8List(),
+      size: size,
+    );
   }
 
   static Future<BitmapDescriptor> getBitmapDescriptorFromSvgString(
