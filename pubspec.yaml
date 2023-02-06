@@ -16,7 +16,7 @@ dependencies:
   go_router: ^6.0.0
   hooks_riverpod: ^2.1.1
   filterable_logger: ^0.0.7
-  flutter_svg: ^1.1.6
+  flutter_svg: ^2.0.0+1
   google_maps_flutter: ^2.2.2
 
 dev_dependencies:
