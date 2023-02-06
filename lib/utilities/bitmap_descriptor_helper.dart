@@ -8,27 +8,25 @@ class BitmapDescriptorHelper {
 
   static Future<BitmapDescriptor> getBitmapDescriptorFromSvgAsset(
     BuildContext context,
-    String svgAssetLink,
+    String assetName,
     Size size,
   ) async {
-    final SvgPicture svgPicture = SvgPicture.asset(svgAssetLink);
-    final ByteData bytes = await svgPicture.bytesLoader.loadBytes(context);
-    return BitmapDescriptor.fromBytes(
-      bytes.buffer.asUint8List(),
-      size: size,
-    );
-  }
+    final double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
 
-  static Future<BitmapDescriptor> getBitmapDescriptorFromSvgString(
-    BuildContext context,
-    String svgString,
-    Size size,
-  ) {
-    return SvgStringLoader(svgString).loadBytes(context).then(
-          (ByteData value) => BitmapDescriptor.fromBytes(
-            value.buffer.asUint8List(),
-            size: size,
-          ),
-        );
+    final String svgString =
+        await DefaultAssetBundle.of(context).loadString(assetName);
+    final double width = size.width * devicePixelRatio;
+    final double height = size.height * devicePixelRatio;
+
+    final SvgPicture svgPicture = SvgPicture.string(
+      svgString,
+      width: width,
+      height: height,
+    );
+
+    // ignore: use_build_context_synchronously
+    final ByteData bytes = await svgPicture.bytesLoader.loadBytes(context);
+
+    return BitmapDescriptor.fromBytes(bytes.buffer.asUint8List());
   }
 }
