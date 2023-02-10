@@ -10,59 +10,37 @@ class BitmapDescriptorHelper {
 
   static Future<BitmapDescriptor> getBitmapDescriptorFromSvgAsset(
     BuildContext context,
-    String svgAssetLink,
+    String assetName,
+    String? packageName,
+    AssetBundle? assetBundle,
+    SvgTheme? theme,
     Size size,
   ) async {
-    final ui.Image svgImage =
-        await _getSvgImageFromAssets(context, svgAssetLink);
-    final ui.Image sizedSvgImage = await _getSizedSvgImage(svgImage, size);
-
-    final ByteData? pngSizedBytes =
-        await sizedSvgImage.toByteData(format: ui.ImageByteFormat.png);
-    final Uint8List? unit8List = pngSizedBytes?.buffer.asUint8List();
-    if (unit8List == null) {
-      throw Exception('Uint8List is null');
-    }
-    return BitmapDescriptor.fromBytes(unit8List);
+    final SvgAssetLoader svgAssetLoader = SvgAssetLoader(
+      assetName,
+      packageName: packageName,
+      assetBundle: assetBundle,
+      theme: theme ?? const SvgTheme(),
+    );
+    final ByteData byteData = await svgAssetLoader.loadBytes(context);
+    final Uint8List unit8List = byteData.buffer.asUint8List();
+    return BitmapDescriptor.fromBytes(unit8List, size: size);
   }
 
   static Future<BitmapDescriptor> getBitmapDescriptorFromSvgString(
+    BuildContext context,
     String svgString,
+    SvgTheme? theme,
     Size size,
   ) async {
-    final ui.Image svgImage = await _getSvgImageFromString(svgString);
-    final ui.Image sizedSvgImage = await _getSizedSvgImage(svgImage, size);
+    final SvgStringLoader svgStringLoader = SvgStringLoader(
+      svgString,
+      theme: theme ?? const SvgTheme(),
+    );
 
-    final ByteData? pngSizedBytes =
-        await sizedSvgImage.toByteData(format: ui.ImageByteFormat.png);
-    final Uint8List? unit8List = pngSizedBytes?.buffer.asUint8List();
-    if (unit8List == null) {
-      throw Exception('Uint8List is null');
-    }
-    return BitmapDescriptor.fromBytes(unit8List);
-  }
-
-  static Future<ui.Image> _getSvgImageFromAssets(
-    BuildContext context,
-    String svgAssertLink,
-  ) async {
-    final String svgString =
-        await DefaultAssetBundle.of(context).loadString(svgAssertLink);
-    final DrawableRoot drawableRoot = await svg.fromSvgString(svgString, '');
-    final ui.Picture picture = drawableRoot.toPicture();
-    final ui.Image image = await picture.toImage(
-        drawableRoot.viewport.width.toInt(),
-        drawableRoot.viewport.height.toInt());
-    return image;
-  }
-
-  static Future<ui.Image> _getSvgImageFromString(String svgString) async {
-    final DrawableRoot drawableRoot = await svg.fromSvgString(svgString, '');
-    final ui.Picture picture = drawableRoot.toPicture();
-    final ui.Image image = await picture.toImage(
-        drawableRoot.viewport.width.toInt(),
-        drawableRoot.viewport.height.toInt());
-    return image;
+    final ByteData byteData = await svgStringLoader.loadBytes(context);
+    final Uint8List unit8List = byteData.buffer.asUint8List();
+    return BitmapDescriptor.fromBytes(unit8List, size: size);
   }
 
   static Future<ui.Image> _getSizedSvgImage(
