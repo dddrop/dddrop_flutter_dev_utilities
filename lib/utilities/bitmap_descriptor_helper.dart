@@ -10,12 +10,12 @@ class BitmapDescriptorHelper {
 
   static Future<BitmapDescriptor> getBitmapDescriptorFromSvgAsset(
     BuildContext context,
-    String assetName,
+    String assetName, {
     String? packageName,
     AssetBundle? assetBundle,
     SvgTheme? theme,
-    Size size,
-  ) async {
+    Size? size,
+  }) async {
     final SvgAssetLoader svgAssetLoader = SvgAssetLoader(
       assetName,
       packageName: packageName,
@@ -29,10 +29,10 @@ class BitmapDescriptorHelper {
 
   static Future<BitmapDescriptor> getBitmapDescriptorFromSvgString(
     BuildContext context,
-    String svgString,
+    String svgString, {
     SvgTheme? theme,
-    Size size,
-  ) async {
+    Size? size,
+  }) async {
     final SvgStringLoader svgStringLoader = SvgStringLoader(
       svgString,
       theme: theme ?? const SvgTheme(),
